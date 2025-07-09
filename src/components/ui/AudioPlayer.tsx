@@ -48,7 +48,7 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(
         audioRef.current.currentTime = 0;
         if (isPlaying) audioRef.current.play();
       }
-    }, [audioUrl]);
+    }, [audioUrl, isPlaying]);
 
     const handleTimeUpdate = () => {
       if (!audioRef.current) return;
@@ -121,5 +121,5 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(
     );
   }
 );
-
+AudioPlayer.displayName = 'AudioPlayer';
 export default AudioPlayer; 

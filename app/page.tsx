@@ -25,7 +25,6 @@ interface Episode {
 export default function PodcastPage() {
   const [darkMode, setDarkMode] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [currentlyPlaying, setCurrentlyPlaying] = useState<number | null>(null)
   const [email, setEmail] = useState("")
   const [visibleEpisodes, setVisibleEpisodes] = useState(3)
   const [episodes, setEpisodes] = useState<Episode[]>([])
@@ -430,7 +429,7 @@ export default function PodcastPage() {
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
                   This podcast is a space where we can learn from and encourage each other through discussions on 
                   how God has worked and is working in our lives. I hope you enjoy these conversations as much as I do!
-                  I pray that we grow in wisdom, faith, and love as we journey alongside one another. It's my joy
+                  I pray that we grow in wisdom, faith, and love as we journey alongside one another. It&apos;s my joy
                   to bring this podcast to you!
                 </p>
               </div>
