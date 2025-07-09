@@ -1,8 +1,6 @@
 "use client"
 
-import type React from "react"
-
-import { useState, useEffect, useMemo } from "react"
+import React, { useRef, useState, useEffect, useMemo } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,6 +10,7 @@ import { Play, Pause, Moon, Sun, Menu, X, Mail, ChevronDown, Volume2 } from "luc
 import { FaInstagram, FaSpotify, FaPodcast } from "react-icons/fa"
 import { toast } from "sonner"
 import { Toaster } from "sonner"
+import AudioPlayer, { AudioPlayerHandle } from "@/components/ui/AudioPlayer";
 
 interface Episode {
   id: number
@@ -31,6 +30,9 @@ export default function PodcastPage() {
   const [visibleEpisodes, setVisibleEpisodes] = useState(3)
   const [episodes, setEpisodes] = useState<Episode[]>([])
   const [sortOrder, setSortOrder] = useState<'desc' | 'asc'>('desc');
+  const [currentEpisode, setCurrentEpisode] = useState<Episode | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const playerRef = useRef<AudioPlayerHandle | null>(null);
 
   useEffect(() => {
     fetch("/episodes.json")
@@ -52,12 +54,23 @@ export default function PodcastPage() {
   }
 
   const handlePlay = (episodeId: number) => {
-    if (currentlyPlaying === episodeId) {
-      setCurrentlyPlaying(null)
+    if (currentEpisode && currentEpisode.id === episodeId) {
+      // Toggle play/pause
+      if (isPlaying) {
+        playerRef.current?.pause();
+        setIsPlaying(false);
+      } else {
+        playerRef.current?.play();
+        setIsPlaying(true);
+      }
     } else {
-      setCurrentlyPlaying(episodeId)
+      const ep = episodes.find((e) => e.id === episodeId);
+      if (ep) {
+        setCurrentEpisode(ep);
+        setIsPlaying(true);
+      }
     }
-  }
+  };
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault()
@@ -237,14 +250,14 @@ export default function PodcastPage() {
                       <Button
                         onClick={() => handlePlay(latestEpisode.id)}
                         className="bg-primary hover:bg-primary/90 text-white flex items-center space-x-2 px-6 py-2 text-base font-semibold rounded shadow"
-                        aria-label={`${currentlyPlaying === latestEpisode.id ? "Pause" : "Play"} latest episode`}
+                        aria-label={`${currentEpisode && currentEpisode.id === latestEpisode.id ? (isPlaying ? "Pause" : "Resume") : "Play"} latest episode`}
                       >
-                        {currentlyPlaying === latestEpisode.id ? (
-                          <Pause className="w-4 h-4" />
+                        {currentEpisode && currentEpisode.id === latestEpisode.id ? (
+                          isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />
                         ) : (
                           <Play className="w-4 h-4" />
                         )}
-                        <span>Listen Now</span>
+                        <span>{currentEpisode && currentEpisode.id === latestEpisode.id ? (isPlaying ? "Pause" : "Resume") : "Listen Now"}</span>
                       </Button>
                     </div>
                   </CardContent>
@@ -326,14 +339,14 @@ export default function PodcastPage() {
                     onClick={() => handlePlay(episode.id)}
                     variant="outline"
                     className="w-full border-primary text-primary hover:bg-primary hover:text-white transition-colors mt-auto"
-                    aria-label={`${currentlyPlaying === episode.id ? "Pause" : "Play"} episode: ${episode.title}`}
+                    aria-label={`${currentEpisode && currentEpisode.id === episode.id ? (isPlaying ? "Pause" : "Resume") : "Play"} episode: ${episode.title}`}
                   >
-                    {currentlyPlaying === episode.id ? (
-                      <Pause className="w-4 h-4 mr-2" />
+                    {currentEpisode && currentEpisode.id === episode.id ? (
+                      isPlaying ? <Pause className="w-4 h-4 mr-2" /> : <Play className="w-4 h-4 mr-2" />
                     ) : (
                       <Play className="w-4 h-4 mr-2" />
                     )}
-                    {currentlyPlaying === episode.id ? "Pause" : "Play Episode"}
+                    {currentEpisode && currentEpisode.id === episode.id ? (isPlaying ? "Pause" : "Resume") : "Play Episode"}
                   </Button>
                 </CardContent>
               </Card>
@@ -513,6 +526,17 @@ export default function PodcastPage() {
         </div>
       </footer>
 
+      {currentEpisode && (
+        <AudioPlayer
+          ref={playerRef}
+          audioUrl={currentEpisode.audioUrl}
+          title={currentEpisode.title}
+          guest={currentEpisode.guest}
+          isPlaying={isPlaying}
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+        />
+      )}
       <Toaster position="top-right" />
     </div>
   )
