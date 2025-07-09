@@ -1,4 +1,28 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Double-A Discourse
+
+Double-A Discourse is a modern podcast website built with Next.js, featuring engaging conversations, faith journeys, and stories from a diverse community. Dive into the backgrounds, experiences, and wisdom of our brothers and sisters through a beautifully designed, interactive platform.
+
+## About the Site
+
+- **Podcast Episodes:** Browse, sort, and listen to a growing library of podcast episodes, each with detailed descriptions, guest info, and direct streaming from Podbean.
+- **Persistent Audio Player:** Enjoy a Spotify/Apple-style audio player fixed to the bottom of the site, with play/pause, resume, and close controls for seamless listening.
+- **Modern UI:** Clean, responsive design using Tailwind CSS, with dark mode support and smooth animations.
+- **Dynamic Content:** Episodes are loaded from a JSON file and can be easily updated or expanded.
+- **Accessible & Fast:** Built with accessibility and performance in mind, leveraging Next.js best practices.
+
+## Features
+- Browse and sort episodes by newest or oldest
+- Listen to episodes directly in the browser
+- Persistent, interactive audio player
+- Dark mode toggle
+- About and contact sections
+- Social media and podcast platform links
+
+## Tech Stack
+- [Next.js](https://nextjs.org) (App Router)
+- [React](https://react.dev)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Podbean](https://podbean.com) for audio hosting
 
 ## Getting Started
 
@@ -18,19 +42,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contributing
 
-## Learn More
+Contributions, feedback, and episode ideas are welcome! Feel free to open an issue or submit a pull request.
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
