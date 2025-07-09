@@ -422,8 +422,8 @@ export default function PodcastPage() {
               </h2>
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                  Welcome to Double-A Discourse! I'm Caleb Yang, someone who loves asking the big questions in life 
-                  and having honest, meaningful conversations. I'm a senior studying computer science at UCI, and 
+                  Welcome to Double-A Discourse! I&apos;m Caleb Yang, someone who loves asking the big questions in life 
+                  and having honest, meaningful conversations. I&apos;m a senior studying computer science at UCI, and 
                   I enjoy playing Spikeball, jamming with friends, and yapping about anything and everything.
                 </p>
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
