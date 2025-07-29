@@ -101,7 +101,8 @@ export default function PodcastPage() {
 
   // Sorted episodes for the grid
   const sortedEpisodes = useMemo(() => {
-    return [...episodes].slice(1).sort((a, b) => {
+    if (!latestEpisode) return [];
+    return episodes.filter(e => e.id !== latestEpisode.id).sort((a, b) => {
       const aDate = new Date(a.publishDate).getTime();
       const bDate = new Date(b.publishDate).getTime();
       return sortOrder === 'desc' ? bDate - aDate : aDate - bDate;
