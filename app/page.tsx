@@ -107,7 +107,7 @@ export default function PodcastPage() {
       const bDate = new Date(b.publishDate).getTime();
       return sortOrder === 'desc' ? bDate - aDate : aDate - bDate;
     });
-  }, [episodes, sortOrder]);
+  }, [episodes, sortOrder, latestEpisode]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">

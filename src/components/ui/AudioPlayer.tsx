@@ -48,6 +48,7 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(
         audioRef.current.currentTime = 0;
         if (isPlaying) audioRef.current.play();
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [audioUrl]);
 
     const handleTimeUpdate = () => {
